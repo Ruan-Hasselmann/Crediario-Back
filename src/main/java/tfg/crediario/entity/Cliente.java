@@ -33,6 +33,9 @@ public class Cliente {
     @Column(name = "\"Status\"")
     private Boolean status;
 
+    @Column(name= "\"Data cadastro\"")
+    private String dataCadastro;
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

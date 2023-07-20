@@ -21,6 +21,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     void updateFalse(Boolean status, Long id);
     @Query("select c from Cliente c where c.status = false")
     List<Cliente> findInactive();
-    @Query("select c from Cliente c where c.status = true order by c.id, c.nome, c.cpf, c.rg, c.telefone, c.status")
+    @Query("select c from Cliente c where c.status = true order by c.id, c.nome, c.cpf, c.rg, c.telefone, c.status, c.dataCadastro")
     List<Cliente> findByStatus();
 }
