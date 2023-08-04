@@ -33,8 +33,12 @@ public class Cliente {
     @Column(name = "\"Status\"")
     private Boolean status;
 
-    @Column(name= "\"Data cadastro\"")
+    @Column(name = "\"Data cadastro\"")
     private String dataCadastro;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_endereco", nullable = false)
+    private Endereco idEndereco;
 
     @Override
     public final boolean equals(Object o) {
