@@ -1,65 +1,69 @@
 package tfg.crediario.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tfg.crediario.entity.Cliente;
-import tfg.crediario.entity.Endereco;
-import tfg.crediario.repository.ClienteRepository;
+import tfg.crediario.service.ClienteService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
     @GetMapping
-    public List<Cliente> listarAtivos() {
-        return clienteRepository.findByStatus();
+    public List<Cliente> getAllClientes() {
+        return clienteService.getAllClientes();
     }
 
-    @GetMapping("/inativo")
-    List<Cliente> listarInativos() {
-        return clienteRepository.findInactive();
-    }
-
-    @GetMapping("/todos")
-    List<Cliente> listarTodos() {
-        return clienteRepository.findAll();
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id) {
+        Cliente cliente = clienteService.getClienteById(id);
+        if (cliente != null) {
+            return ResponseEntity.ok(cliente);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
-    public Cliente adicionar(@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
+        Cliente createdCliente = clienteService.createCliente(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdCliente);
     }
 
-    @DeleteMapping
-    public String delete(@RequestParam Long id) {
-        try {
-            clienteRepository.updateFalse(false, id);
-            return "Cliente desativado";
-        } catch (Exception e) {
-            return e.getMessage();
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
+        Cliente updatedCliente = clienteService.updateCliente(id, cliente);
+        if (updatedCliente != null) {
+            return ResponseEntity.ok(updatedCliente);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @PatchMapping
-    public String ativar(@RequestParam Long id) {
-        try {
-            clienteRepository.updateTrue(true, id);
-            return "Cliente ativado";
-        } catch (Exception e) {
-            return e.getMessage();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> desactiveCliente(@PathVariable Integer id) {
+        boolean status = clienteService.updateStatusCliente(id, false);
+        if (status) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @GetMapping("/ClienteEndereco/{id}")
-    public Optional<Endereco> endereco(@RequestParam Integer id) {
-        return clienteRepository.findWithEndereco(id);
+    @PostMapping("/{id}/ativar")
+    public ResponseEntity<Void> activeCliente(@PathVariable Integer id) {
+        boolean status = clienteService.updateStatusCliente(id, true);
+        if (status) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
-    ;
 }
