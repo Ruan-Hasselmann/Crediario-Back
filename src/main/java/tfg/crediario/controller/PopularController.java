@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tfg.crediario.entity.Cliente;
 import tfg.crediario.entity.Endereco;
-import tfg.crediario.repository.ClienteRepository;
 import tfg.crediario.repository.EnderecoRepository;
-import tfg.crediario.service.ClienteService;
+import tfg.crediario.service.impl.ClienteServiceImpl;
 
 import java.util.Random;
 
@@ -16,7 +15,7 @@ import java.util.Random;
 @RequestMapping("/popular")
 public class PopularController {
     @Autowired
-    private ClienteService clienteService;
+    private ClienteServiceImpl clienteServiceImpl;
     @Autowired
     private EnderecoRepository enderecoRepository;
 
@@ -44,7 +43,7 @@ public class PopularController {
         endereco.setLogradouro("");
         endereco.setNumero(random.nextInt());
 
-        clienteService.createCliente(cliente);
+        clienteServiceImpl.createCliente(cliente);
 //        enderecoRepository.save(endereco);
 
         return "Populado com sucesso";

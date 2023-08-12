@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import tfg.crediario.entity.Cliente;
 import tfg.crediario.service.ClienteService;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,8 +34,6 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
-        cliente.setStatus(true);
-        cliente.setDataCadastro(getDateTime());
         Cliente createdCliente = clienteService.createCliente(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCliente);
     }
@@ -73,9 +68,4 @@ public class ClienteController {
         }
     }
 
-    private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
 }
