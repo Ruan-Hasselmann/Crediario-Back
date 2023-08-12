@@ -1,5 +1,6 @@
 package tfg.crediario.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -35,10 +36,6 @@ public class Cliente {
 
     @Column(name = "\"Data cadastro\"")
     private String dataCadastro;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_endereco", nullable = false)
-    private Endereco idEndereco;
 
     @Override
     public final boolean equals(Object o) {

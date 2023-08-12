@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import tfg.crediario.entity.Cliente;
 import tfg.crediario.service.ClienteService;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
@@ -22,9 +26,9 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id) {
-        Cliente cliente = clienteService.getClienteById(id);
-        if (cliente != null) {
+    public ResponseEntity<Optional<Cliente>> getClienteById(@PathVariable Integer id) {
+        Optional<Cliente> cliente = clienteService.getClienteById(id);
+        if (cliente.isPresent()) {
             return ResponseEntity.ok(cliente);
         } else {
             return ResponseEntity.notFound().build();
@@ -33,13 +37,15 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
+        cliente.setStatus(true);
+        cliente.setDataCadastro(getDateTime());
         Cliente createdCliente = clienteService.createCliente(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCliente);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
-        Cliente updatedCliente = clienteService.updateCliente(id, cliente);
+    public ResponseEntity<Integer> updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
+        Integer updatedCliente = clienteService.updateCliente(id, cliente);
         if (updatedCliente != null) {
             return ResponseEntity.ok(updatedCliente);
         } else {
@@ -49,8 +55,8 @@ public class ClienteController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> desactiveCliente(@PathVariable Integer id) {
-        boolean status = clienteService.updateStatusCliente(id, false);
-        if (status) {
+        Integer status = clienteService.updateStatusCliente(id, false);
+        if (status == 1) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -59,11 +65,17 @@ public class ClienteController {
 
     @PostMapping("/{id}/ativar")
     public ResponseEntity<Void> activeCliente(@PathVariable Integer id) {
-        boolean status = clienteService.updateStatusCliente(id, true);
-        if (status) {
+        Integer status = clienteService.updateStatusCliente(id, true);
+        if (status == 1) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }

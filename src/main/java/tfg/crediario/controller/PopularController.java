@@ -8,6 +8,7 @@ import tfg.crediario.entity.Cliente;
 import tfg.crediario.entity.Endereco;
 import tfg.crediario.repository.ClienteRepository;
 import tfg.crediario.repository.EnderecoRepository;
+import tfg.crediario.service.ClienteService;
 
 import java.util.Random;
 
@@ -15,7 +16,7 @@ import java.util.Random;
 @RequestMapping("/popular")
 public class PopularController {
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
     @Autowired
     private EnderecoRepository enderecoRepository;
 
@@ -43,8 +44,8 @@ public class PopularController {
         endereco.setLogradouro("");
         endereco.setNumero(random.nextInt());
 
-        clienteRepository.save(cliente);
-        enderecoRepository.save(endereco);
+        clienteService.createCliente(cliente);
+//        enderecoRepository.save(endereco);
 
         return "Populado com sucesso";
     }
