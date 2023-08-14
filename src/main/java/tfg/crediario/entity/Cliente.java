@@ -1,55 +1,61 @@
 package tfg.crediario.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
-
-import java.util.Objects;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
 @Entity
 @Table(name = "\"Cliente\"")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "\"IdCliente\"", nullable = false)
+    @Column(name = "\"idCliente\"", nullable = false)
     private Integer id;
 
-    @Column(name = "\"Nome\"", nullable = false, length = Integer.MAX_VALUE)
-    private String nome;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "\"idCliente\"", nullable = false)
+    private Endereco endereco;
 
-    @Column(name = "\"Cpf\"", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "cpf", nullable = false, length = Integer.MAX_VALUE)
     private String cpf;
 
-    @Column(name = "\"Rg\"", length = Integer.MAX_VALUE)
-    private String rg;
-
-    @Column(name = "\"Telefone\"", nullable = false, length = Integer.MAX_VALUE)
-    private String telefone;
-
-    @Column(name = "\"Status\"")
-    private Boolean status;
-
-    @Column(name = "\"Data cadastro\"")
+    @Column(name = "\"dataCadastro\"", length = Integer.MAX_VALUE)
     private String dataCadastro;
 
-    @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
-        Cliente cliente = (Cliente) o;
-        return getId() != null && Objects.equals(getId(), cliente.getId());
+    @Column(name = "nome", length = Integer.MAX_VALUE)
+    private String nome;
+
+    @Column(name = "rg", length = Integer.MAX_VALUE)
+    private String rg;
+
+    @Column(name = "status", nullable = false)
+    private Boolean status = false;
+
+    @Column(name = "telefone", length = Integer.MAX_VALUE)
+    private String telefone;
+
+    @OneToOne(optional = false)
+    private Vendedor vendedor;
+
+    public Vendedor getVendedor() {
+        return vendedor;
     }
 
-    @Override
-    public final int hashCode() {
-        return getClass().hashCode();
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    @OneToOne(optional = false)
+    private Pagamento pagamento;
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 }

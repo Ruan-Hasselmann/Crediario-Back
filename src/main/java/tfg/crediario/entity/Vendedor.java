@@ -11,23 +11,27 @@ import lombok.Setter;
 public class Vendedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "\"IdVendedor\"", nullable = false)
+    @Column(name = "\"idVendedor\"", nullable = false)
     private Integer id;
 
-    @Column(name = "\"Nome\"", nullable = false, length = Integer.MAX_VALUE)
-    private String nome;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "\"idVendedor\"", nullable = false)
+    private Endereco endereco;
 
-    @Column(name = "\"Cpf\"", nullable = false, length = Integer.MAX_VALUE)
-    private String cpf;
-
-    @Column(name = "\"Rg\"", nullable = false, length = Integer.MAX_VALUE)
-    private String rg;
-
-    @Column(name = "\"Contato\"", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "contato", nullable = false, length = Integer.MAX_VALUE)
     private String contato;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"Endereco\"")
-    private Endereco endereco;
+    @Column(name = "cpf", nullable = false, length = Integer.MAX_VALUE)
+    private String cpf;
+
+    @Column(name = "nome", nullable = false, length = Integer.MAX_VALUE)
+    private String nome;
+
+    @Column(name = "rg", nullable = false, length = Integer.MAX_VALUE)
+    private String rg;
+
+    @OneToOne(mappedBy = "vendedor")
+    private Cliente cliente;
 
 }

@@ -39,30 +39,30 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Integer> updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
+    public ResponseEntity<String> updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
         Integer updatedCliente = clienteService.updateCliente(id, cliente);
         if (updatedCliente != null) {
-            return ResponseEntity.ok(updatedCliente);
+            return ResponseEntity.ok("Cliente atualizado com sucesso");
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> desactiveCliente(@PathVariable Integer id) {
+    public ResponseEntity<String> desactiveCliente(@PathVariable Integer id) {
         Integer status = clienteService.updateStatusCliente(id, false);
         if (status == 1) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("Cliente deletado com sucesso");
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping("/{id}/ativar")
-    public ResponseEntity<Void> activeCliente(@PathVariable Integer id) {
+    public ResponseEntity<String> activeCliente(@PathVariable Integer id) {
         Integer status = clienteService.updateStatusCliente(id, true);
         if (status == 1) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("Cliente ativado com sucesso");
         } else {
             return ResponseEntity.notFound().build();
         }

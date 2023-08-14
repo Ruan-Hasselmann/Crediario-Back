@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @Entity
@@ -13,31 +11,31 @@ import java.time.LocalDate;
 public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "\"IdCliente\"", nullable = false)
+    @Column(name = "\"idPagamento\"", nullable = false)
     private Integer id;
 
-    @Column(name = "\"DataVenda\"", nullable = false)
-    private LocalDate dataVenda;
+    @Column(name = "\"dataProximo\"", nullable = false, length = Integer.MAX_VALUE)
+    private String dataProximo;
 
-    @Column(name = "\"DataProx\"", nullable = false)
-    private LocalDate dataProx;
+    @Column(name = "entrada", length = Integer.MAX_VALUE)
+    private String entrada;
 
-    @Column(name = "\"Entrada\"")
-    private Double entrada;
-
-    @Column(name = "\"Total Pago\"", nullable = false)
-    private Double totalPago;
-
-    @Column(name = "\"Restante\"", nullable = false)
-    private Double restante;
-
-    @Column(name = "\"Total\"", nullable = false)
-    private Double total;
-
-    @Column(name = "\"FormaPagamento\"", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "\"formaPagamento\"", length = Integer.MAX_VALUE)
     private String formaPagamento;
 
-    @Column(name = "\"TipoPagamento\"", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "restante", nullable = false, length = Integer.MAX_VALUE)
+    private String restante;
+
+    @Column(name = "\"tipoPagamento\"", nullable = false, length = Integer.MAX_VALUE)
     private String tipoPagamento;
+
+    @Column(name = "total", nullable = false, length = Integer.MAX_VALUE)
+    private String total;
+
+    @Column(name = "\"totalPago\"", nullable = false, length = Integer.MAX_VALUE)
+    private String totalPago;
+
+    @OneToOne(mappedBy = "pagamento")
+    private Cliente cliente;
 
 }
