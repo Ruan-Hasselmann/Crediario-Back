@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "edcbbdf7-030f-4e7b-a645-dffdb49e9872",
+		"name": "Pagamentos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15183163"
+	},
+	"item": [
+		{
+			"name": "Listar todos pagamentos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pagamentos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pagamentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pagamentos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pagamentos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar pagamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataProximo\": \"01/10/2024\",\r\n    \"entrada\": \"100.00\",\r\n    \"formaPagamento\": \"Cartão de crédito\",\r\n    \"tipoPagamento\": \"Parcelado\",\r\n    \"total\": \"600.00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pagamentos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pagamentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar pagamento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataProximo\": \"2022-11-01\",\r\n    \"entrada\": \"200.00\",\r\n    \"formaPagamento\": \"Boleto bancário\",\r\n    \"restante\": \"300.00\",\r\n    \"tipoPagamento\": \"À vista\",\r\n    \"total\": \"500.00\",\r\n    \"totalPago\": \"200.00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pagamentos/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pagamentos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar pagamento",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pagamentos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pagamentos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar pagamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pagamentos/pagamento?id=6&dataProximo=10/10/2023&valor=300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pagamentos",
+						"pagamento"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6"
+						},
+						{
+							"key": "dataProximo",
+							"value": "10/10/2023"
+						},
+						{
+							"key": "valor",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

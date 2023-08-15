@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "da0b7895-0bd8-4f93-9e20-296e368f5b98",
+		"name": "Clientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15183163"
+	},
+	"item": [
+		{
+			"name": "Listar todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cpf\": \"123.456.789-00\",\r\n    \"nome\": \"Fulano de Tal\",\r\n    \"rg\": \"1234567\",\r\n    \"telefone\": \"(11) 1234-5678\",\r\n    \"endereco\": {\r\n        \"bairro\": \"Nome do bairro\",\r\n        \"cep\": \"12345-678\",\r\n        \"cidade\": \"Nome da cidade\",\r\n        \"complemento\": \"Complemento do endereço\",\r\n        \"estado\": \"Nome do estado\",\r\n        \"logradouro\": \"Nome do logradouro\",\r\n        \"numero\": \"123\"\r\n    },\r\n    \"pagamento\": {\r\n        \"dataProximo\": \"2022-10-01\",\r\n        \"entrada\": \"100.00\",\r\n        \"formaPagamento\": \"Cartão de crédito\",\r\n        \"restante\": \"500.00\",\r\n        \"tipoPagamento\": \"Parcelado\",\r\n        \"total\": \"600.00\",\r\n        \"totalPago\": \"100.00\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"cpf\": \"123.456.789-00\",\r\n    \"rg\": \"1234567\",\r\n    \"telefone\": \"(11) 1234-5678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Cliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ativar cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/2/ativar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"2",
+						"ativar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
