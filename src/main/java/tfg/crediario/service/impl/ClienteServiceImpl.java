@@ -1,10 +1,17 @@
 package tfg.crediario.service.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tfg.crediario.entity.Cliente;
+import tfg.crediario.entity.Endereco;
+import tfg.crediario.entity.Pagamento;
 import tfg.crediario.repository.ClienteRepository;
+import tfg.crediario.repository.EnderecoRepository;
+import tfg.crediario.repository.PagamentoRepository;
 import tfg.crediario.service.ClienteService;
+import tfg.crediario.service.EnderecoService;
+import tfg.crediario.service.PagamentoService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,6 +25,12 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private EnderecoService enderecoService;
+
+    @Autowired
+    private PagamentoService pagamentoService;
+
     public List<Cliente> getAllClientes() {
         return clienteRepository.findAllByStatus();
     }
@@ -29,6 +42,8 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente createCliente(Cliente cliente) {
         cliente.setStatus(true);
         cliente.setDataCadastro(getDateTime());
+        enderecoService.createEndereco(cliente.getEndereco());
+        pagamentoService.createPagamento(cliente.getPagamento());
         return clienteRepository.save(cliente);
     }
 

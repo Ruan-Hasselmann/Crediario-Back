@@ -14,13 +14,8 @@ public class Vendedor {
     @Column(name = "\"idVendedor\"", nullable = false)
     private Integer id;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "\"idVendedor\"", nullable = false)
-    private Endereco endereco;
-
-    @Column(name = "contato", nullable = false, length = Integer.MAX_VALUE)
-    private String contato;
+    @Column(name = "telefone", nullable = false, length = Integer.MAX_VALUE)
+    private String telefone;
 
     @Column(name = "cpf", nullable = false, length = Integer.MAX_VALUE)
     private String cpf;
@@ -30,8 +25,5 @@ public class Vendedor {
 
     @Column(name = "rg", nullable = false, length = Integer.MAX_VALUE)
     private String rg;
-
-    @OneToOne(mappedBy = "vendedor")
-    private Cliente cliente;
 
 }

@@ -17,7 +17,7 @@ public class Endereco {
     @Column(name = "bairro", nullable = false, length = Integer.MAX_VALUE)
     private String bairro;
 
-    @Column(name = "cep", length = Integer.MAX_VALUE)
+    @Column(name = "cep", nullable = false, length = Integer.MAX_VALUE)
     private String cep;
 
     @Column(name = "cidade", nullable = false, length = Integer.MAX_VALUE)
@@ -34,11 +34,5 @@ public class Endereco {
 
     @Column(name = "numero", nullable = false, length = Integer.MAX_VALUE)
     private String numero;
-
-    @OneToOne(mappedBy = "endereco")
-    private Cliente cliente;
-
-    @OneToOne(mappedBy = "endereco")
-    private Vendedor vendedor;
 
 }

@@ -14,16 +14,19 @@ public class Pagamento {
     @Column(name = "\"idPagamento\"", nullable = false)
     private Integer id;
 
-    @Column(name = "\"dataProximo\"", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "\"dataProximo\"", length = Integer.MAX_VALUE)
     private String dataProximo;
+
+    @Column(name = "\"dataVenda\"", nullable = false, length = Integer.MAX_VALUE)
+    private String dataVenda;
 
     @Column(name = "entrada", length = Integer.MAX_VALUE)
     private String entrada;
 
-    @Column(name = "\"formaPagamento\"", length = Integer.MAX_VALUE)
+    @Column(name = "\"formaPagamento\"", nullable = false, length = Integer.MAX_VALUE)
     private String formaPagamento;
 
-    @Column(name = "restante", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "restante", length = Integer.MAX_VALUE)
     private String restante;
 
     @Column(name = "\"tipoPagamento\"", nullable = false, length = Integer.MAX_VALUE)
@@ -34,8 +37,5 @@ public class Pagamento {
 
     @Column(name = "\"totalPago\"", nullable = false, length = Integer.MAX_VALUE)
     private String totalPago;
-
-    @OneToOne(mappedBy = "pagamento")
-    private Cliente cliente;
 
 }
