@@ -42,11 +42,11 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public Cliente updateCliente(Integer id, Cliente cliente) {
+    public Integer updateCliente(Integer id, Cliente cliente) {
         return clienteRepository.updateCliente(cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone(), id);
     }
 
-    public boolean updateStatusCliente(Integer id, Boolean status) {
+    public Integer updateStatusCliente(Integer id, Boolean status) {
         return clienteRepository.updateStatus(status, id);
     }
 

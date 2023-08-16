@@ -12,7 +12,7 @@ public interface EnderecoService {
 
     Endereco createEndereco(Endereco endereco);
 
-    Endereco updateEndereco(Integer id, Endereco endereco);
+    Integer updateEndereco(Integer id, Endereco endereco);
 
-    boolean deleteEndereco(Integer id);
+    Integer deleteEndereco(Integer id);
 }

@@ -25,7 +25,7 @@ public class Cliente {
     private String nome;
 
     @Column(name = "rg", length = Integer.MAX_VALUE)
-    private Integer rg;
+    private String rg;
 
     @Column(name = "status", nullable = false)
     private Boolean status = false;

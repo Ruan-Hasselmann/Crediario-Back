@@ -67,10 +67,10 @@ public class EnderecoController {
      * @return ResponseEntity com a mensagem de sucesso ou not found.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Endereco> updateEndereco(@PathVariable Integer id, @RequestBody Endereco endereco) {
-        Endereco updatedEndereco = enderecoService.updateEndereco(id, endereco);
-        if (updatedEndereco != null) {
-            return ResponseEntity.ok(updatedEndereco);
+    public ResponseEntity<String> updateEndereco(@PathVariable Integer id, @RequestBody Endereco endereco) {
+        Integer updatedEndereco = enderecoService.updateEndereco(id, endereco);
+        if (updatedEndereco == 1) {
+            return ResponseEntity.ok("Endereco atualizado com sucesso");
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -84,8 +84,8 @@ public class EnderecoController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEndereco(@PathVariable Integer id) {
-        boolean deleted = enderecoService.deleteEndereco(id);
-        if (deleted) {
+        Integer deleted = enderecoService.deleteEndereco(id);
+        if (deleted == 1) {
             return ResponseEntity.ok("Endereço deletado com sucesso");
         } else {
             return ResponseEntity.notFound().build();

@@ -70,10 +70,10 @@ public class EnderecoServiceImplTest {
     public void testUpdateEndereco() {
         // Mocking the repository response
         Endereco endereco = new Endereco();
-        when(enderecoRepository.updateEndereco(any(), any(), any(), any(), any(), any(), any(), any())).thenReturn(endereco);
+        when(enderecoRepository.updateEndereco(any(), any(), any(), any(), any(), any(), any(), any())).thenReturn(1);
 
         // Calling the service method
-        Endereco result = enderecoService.updateEndereco(1, endereco);
+        Integer result = enderecoService.updateEndereco(1, endereco);
 
         // Verifying the result
         Assertions.assertEquals(endereco, result);
@@ -82,12 +82,12 @@ public class EnderecoServiceImplTest {
     @Test
     public void testDeleteEndereco() {
         // Mocking the repository response
-        when(enderecoRepository.deleteEnderecoById(1)).thenReturn(true);
+        when(enderecoRepository.deleteEnderecoById(1)).thenReturn(1);
 
         // Calling the service method
-        boolean result = enderecoService.deleteEndereco(1);
+        Integer result = enderecoService.deleteEndereco(1);
 
         // Verifying the result
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(1, result);
     }
 }

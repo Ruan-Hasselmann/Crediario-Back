@@ -12,7 +12,7 @@ public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
     @Transactional
     @Modifying
     @Query("update Vendedor v set v.telefone = ?1, v.cpf = ?2, v.nome = ?3, v.rg = ?4 where v.id = ?5")
-    int updateVendedor(String telefone, String cpf, String nome, Integer rg, Integer id);
+    int updateVendedor(String telefone, String cpf, String nome, String rg, Integer id);
 
     @Query("select v from Vendedor v order by v.id")
     List<Vendedor> getAllVendedores();

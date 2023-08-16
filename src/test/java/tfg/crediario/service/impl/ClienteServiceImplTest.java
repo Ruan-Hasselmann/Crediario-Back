@@ -113,32 +113,40 @@ public class ClienteServiceImplTest {
     }
 
     @Test
-    public void testUpdateCliente() {
+    public void testUpdateClientePositive() {
         Cliente cliente = new Cliente();
-        cliente.setNome("Novo Nome");
+        Integer id = 1;
+        cliente.setNome("João");
         cliente.setCpf("123456789");
         cliente.setRg(987654321);
-        cliente.setTelefone("987654321");
+        cliente.setTelefone("999999999");
 
-        when(clienteRepository.updateCliente(cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone(), 1)).thenReturn(cliente);
+        Integer result = clienteRepository.updateCliente(cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone(), id);
 
-        Cliente result = clienteService.updateCliente(1, cliente);
+        assertEquals(Integer.valueOf(1), result);
+    }
 
-        assertEquals(cliente.getNome(), result.getNome());
-        assertEquals(cliente.getCpf(), result.getCpf());
-        assertEquals(cliente.getRg(), result.getRg());
-        assertEquals(cliente.getTelefone(), result.getTelefone());
+    @Test
+    public void testUpdateClienteNegative() {
+        Cliente cliente = new Cliente();
+        Integer id = 999; // id inválido
+        cliente.setNome("João");
+        cliente.setCpf("123456789");
+        cliente.setRg(987654321);
+        cliente.setTelefone("999999999");
 
-        verify(clienteRepository, times(1)).updateCliente(cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone(), 1);
+        Integer result = clienteRepository.updateCliente(cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone(), id);
+
+        assertEquals(Integer.valueOf(0), result);
     }
 
     @Test
     public void testUpdateStatusCliente() {
-        when(clienteRepository.updateStatus(true, 1)).thenReturn(true);
+        when(clienteRepository.updateStatus(true, 1)).thenReturn(1);
 
-        boolean result = clienteService.updateStatusCliente(1, true);
+        Integer result = clienteService.updateStatusCliente(1, true);
 
-        assertTrue(result);
+        assertEquals(Integer.valueOf(0), result);
 
         verify(clienteRepository, times(1)).updateStatus(true, 1);
     }

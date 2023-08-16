@@ -24,6 +24,6 @@ public class Vendedor {
     private String nome;
 
     @Column(name = "rg", nullable = false, length = Integer.MAX_VALUE)
-    private Integer rg;
+    private String rg;
 
 }

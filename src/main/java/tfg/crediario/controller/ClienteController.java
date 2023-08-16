@@ -62,7 +62,7 @@ public class ClienteController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<String> updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
-        Cliente updatedCliente = clienteService.updateCliente(id, cliente);
+        Integer updatedCliente = clienteService.updateCliente(id, cliente);
         if (updatedCliente != null) {
             return ResponseEntity.ok("Cliente atualizado com sucesso");
         } else {
@@ -78,8 +78,8 @@ public class ClienteController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> desactiveCliente(@PathVariable Integer id) {
-        boolean status = clienteService.updateStatusCliente(id, false);
-        if (status) {
+        Integer status = clienteService.updateStatusCliente(id, false);
+        if (status == 1) {
             return ResponseEntity.ok("Cliente desativado com sucesso");
         } else {
             return ResponseEntity.notFound().build();
@@ -94,8 +94,8 @@ public class ClienteController {
      */
     @PostMapping("/{id}/ativar")
     public ResponseEntity<String> activeCliente(@PathVariable Integer id) {
-        boolean status = clienteService.updateStatusCliente(id, true);
-        if (status) {
+        Integer status = clienteService.updateStatusCliente(id, true);
+        if (status == 1) {
             return ResponseEntity.ok("Cliente ativado com sucesso");
         } else {
             return ResponseEntity.notFound().build();

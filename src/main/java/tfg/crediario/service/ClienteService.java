@@ -13,7 +13,7 @@ public interface ClienteService {
 
     Cliente createCliente(Cliente cliente);
 
-    Cliente updateCliente(Integer id, Cliente cliente);
+    Integer updateCliente(Integer id, Cliente cliente);
 
-    boolean updateStatusCliente(Integer id, Boolean status);
+    Integer updateStatusCliente(Integer id, Boolean status);
 }
