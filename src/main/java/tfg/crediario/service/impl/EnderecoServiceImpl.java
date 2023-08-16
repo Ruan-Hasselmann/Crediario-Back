@@ -32,12 +32,12 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public int updateEndereco(Integer id, @NotNull Endereco endereco) {
+    public Endereco updateEndereco(Integer id, @NotNull Endereco endereco) {
         return enderecoRepository.updateEndereco(endereco.getLogradouro(), endereco.getNumero(), endereco.getComplemento(), endereco.getBairro(), endereco.getCidade(), endereco.getCidade(), endereco.getCep(), id);
     }
 
     @Override
-    public int deleteEndereco(Integer id) {
+    public boolean deleteEndereco(Integer id) {
         return enderecoRepository.deleteEnderecoById(id);
     }
 }

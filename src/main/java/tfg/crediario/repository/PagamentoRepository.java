@@ -20,7 +20,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer> {
     @Query("""
             update Pagamento p set p.dataProximo = ?1, p.entrada = ?2, p.formaPagamento = ?3, p.restante = ?4, p.tipoPagamento = ?5, p.total = ?6, p.totalPago = ?7
             where p.id = ?8""")
-    int updatePagamento(String dataProximo, String entrada, String formaPagamento, String restante, String tipoPagamento, String total, String totalPago, Integer id);
+    Integer updatePagamento(String dataProximo, Double entrada, String formaPagamento, Double restante, String tipoPagamento, Double total, Double totalPago, Integer id);
 
     Optional<Pagamento> findById(Integer id);
 

@@ -18,7 +18,7 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
     @Query("""
             update Endereco e set e.logradouro = ?1, e.numero = ?2, e.complemento = ?3, e.bairro = ?4, e.cidade = ?5, e.estado = ?6, e.cep = ?7
             where e.id = ?8""")
-    int updateEndereco(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep, Integer id);
+    Endereco updateEndereco(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep, Integer id);
 
     @Override
     @NotNull
@@ -27,7 +27,7 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
     @Transactional
     @Modifying
     @Query("delete from Endereco e where e.id = ?1")
-    int deleteEnderecoById(Integer id);
+    boolean deleteEnderecoById(Integer id);
 
     @Override
     @Query("select e from Endereco e order by e.id")

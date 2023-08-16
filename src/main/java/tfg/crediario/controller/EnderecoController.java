@@ -22,42 +22,70 @@ public class EnderecoController {
         this.enderecoService = enderecoService;
     }
 
+    /**
+     * Retorna um endereco específico pelo seu ID.
+     *
+     * @param id ID do endereco a ser retornado.
+     * @return ResponseEntity com o endereco encontrado ou not found.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Endereco>> getEnderecoById(@PathVariable Integer id) {
         Optional<Endereco> endereco = enderecoService.getEnderecoById(id);
-        if (endereco != null) {
+        if (endereco.isPresent()) {
             return ResponseEntity.ok(endereco);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
+    /**
+     * Retorna uma lista de todos os endereços cadastrados.
+     */
     @GetMapping
     public ResponseEntity<List<Endereco>> getAllEnderecos() {
         List<Endereco> enderecos = enderecoService.getAllEnderecos();
         return ResponseEntity.ok(enderecos);
     }
 
+    /**
+     * Cria um novo endereco.
+     *
+     * @param endereco endereco a ser criado.
+     * @return ResponseEntity com o endereco criado e status CREATED.
+     */
     @PostMapping
     public ResponseEntity<Endereco> createEndereco(@RequestBody Endereco endereco) {
         Endereco createdEndereco = enderecoService.createEndereco(endereco);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEndereco);
     }
 
+    /**
+     * Atualiza um endereco existente.
+     *
+     * @param id       ID do endereco a ser atualizado.
+     * @param endereco endereco com as informações atualizadas.
+     * @return ResponseEntity com a mensagem de sucesso ou not found.
+     */
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateEndereco(@PathVariable Integer id, @RequestBody Endereco endereco) {
-        Integer updatedEndereco = enderecoService.updateEndereco(id, endereco);
-        if (updatedEndereco == 1) {
-            return ResponseEntity.ok("Endereço atualizado com sucesso");
+    public ResponseEntity<Endereco> updateEndereco(@PathVariable Integer id, @RequestBody Endereco endereco) {
+        Endereco updatedEndereco = enderecoService.updateEndereco(id, endereco);
+        if (updatedEndereco != null) {
+            return ResponseEntity.ok(updatedEndereco);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
+    /**
+     * Deleta um endereco existente.
+     *
+     * @param id ID do endereco a ser deleta.
+     * @return ResponseEntity com a mensagem de sucesso ou not found.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEndereco(@PathVariable Integer id) {
-        Integer deleted = enderecoService.deleteEndereco(id);
-        if (deleted == 1) {
+        boolean deleted = enderecoService.deleteEndereco(id);
+        if (deleted) {
             return ResponseEntity.ok("Endereço deletado com sucesso");
         } else {
             return ResponseEntity.notFound().build();

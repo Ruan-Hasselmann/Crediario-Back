@@ -17,11 +17,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Transactional
     @Modifying
     @Query("update Cliente c set c.status = ?1 where c.id = ?2")
-    Integer updateStatus(Boolean status, Integer id);
+    boolean updateStatus(Boolean status, Integer id);
 
     @Transactional
     @Modifying
     @Query("update Cliente c set c.nome = ?1, c.cpf = ?2, c.rg = ?3, c.telefone = ?4 where c.id = ?5")
-    Integer updateCliente(String nome, String cpf, String rg, String telefone, Integer id);
+    Cliente updateCliente(String nome, String cpf, Integer rg, String telefone, Integer id);
 
 }

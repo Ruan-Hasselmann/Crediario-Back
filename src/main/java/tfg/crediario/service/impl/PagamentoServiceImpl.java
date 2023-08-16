@@ -31,7 +31,7 @@ public class PagamentoServiceImpl implements PagamentoService {
     @Override
     public Pagamento createPagamento(Pagamento pagamento) {
         pagamento.setDataVenda(getDateTime());
-        pagamento.setRestante(String.valueOf(Double.parseDouble(pagamento.getTotal()) - Double.parseDouble(pagamento.getEntrada())));
+        pagamento.setRestante(pagamento.getTotal() - pagamento.getEntrada());
         pagamento.setTotalPago(pagamento.getEntrada());
         return pagamentoRepository.save(pagamento);
     }
@@ -51,8 +51,8 @@ public class PagamentoServiceImpl implements PagamentoService {
         Optional<Pagamento> pagamentoAtual = getPagamentoById(id);
         if (pagamentoAtual.isPresent()) {
             pagamentoAtual.get().setDataProximo(dataProximo);
-            pagamentoAtual.get().setRestante(String.valueOf(Double.parseDouble(pagamentoAtual.get().getRestante()) - valor));
-            pagamentoAtual.get().setTotalPago(String.valueOf(Double.parseDouble(pagamentoAtual.get().getTotalPago()) + valor));
+            pagamentoAtual.get().setRestante(pagamentoAtual.get().getRestante() - valor);
+            pagamentoAtual.get().setTotalPago(pagamentoAtual.get().getTotalPago() + valor);
             return updatePagamento(id, pagamentoAtual);
         }
         return 0;

@@ -14,6 +14,7 @@ public class VendedorServiceImpl implements VendedorService {
 
     @Autowired
     private VendedorRepository vendedorRepository;
+
     @Override
     public Vendedor createVendedor(Vendedor vendedor) {
         return vendedorRepository.save(vendedor);

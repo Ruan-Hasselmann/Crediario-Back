@@ -25,7 +25,7 @@ public class Cliente {
     private String nome;
 
     @Column(name = "rg", length = Integer.MAX_VALUE)
-    private String rg;
+    private Integer rg;
 
     @Column(name = "status", nullable = false)
     private Boolean status = false;
@@ -33,13 +33,14 @@ public class Cliente {
     @Column(name = "telefone", nullable = false, length = Integer.MAX_VALUE)
     private String telefone;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Column(name = "vendedor", nullable = false, length = Integer.MAX_VALUE)
+    private String vendedor;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "\"endereco\"", nullable = false)
     private Endereco endereco;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "\"pagamento\"", nullable = false)
     private Pagamento pagamento;
 
