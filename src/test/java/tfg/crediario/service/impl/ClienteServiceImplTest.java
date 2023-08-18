@@ -118,7 +118,7 @@ public class ClienteServiceImplTest {
         Integer id = 1;
         cliente.setNome("João");
         cliente.setCpf("123456789");
-        cliente.setRg(987654321);
+        cliente.setRg("987654321");
         cliente.setTelefone("999999999");
 
         Integer result = clienteRepository.updateCliente(cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone(), id);
@@ -132,7 +132,7 @@ public class ClienteServiceImplTest {
         Integer id = 999; // id inválido
         cliente.setNome("João");
         cliente.setCpf("123456789");
-        cliente.setRg(987654321);
+        cliente.setRg("987654321");
         cliente.setTelefone("999999999");
 
         Integer result = clienteRepository.updateCliente(cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone(), id);
