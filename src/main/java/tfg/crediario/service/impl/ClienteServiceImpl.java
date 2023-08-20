@@ -9,6 +9,7 @@ import tfg.crediario.service.EnderecoService;
 import tfg.crediario.service.PagamentoService;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +49,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     public Integer updateStatusCliente(Integer id, Boolean status) {
         return clienteRepository.updateStatus(status, id);
+    }
+
+    public List<Cliente> findByData(String dataProximo) throws ParseException {
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        dataProximo = String.valueOf(date.parse(dataProximo));
+        return clienteRepository.findByData(dataProximo);
     }
 
     private String getDateTime() {

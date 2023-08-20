@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tfg.crediario.entity.Cliente;
 import tfg.crediario.service.ClienteService;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,5 +101,10 @@ public class ClienteController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/data/{dataProximo}")
+    public List<Cliente> getClienteByData(@PathVariable String dataProximo) throws ParseException {
+        return clienteService.findByData(dataProximo);
     }
 }

@@ -2,6 +2,7 @@ package tfg.crediario.service;
 
 import tfg.crediario.entity.Cliente;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,6 @@ public interface ClienteService {
     Integer updateCliente(Integer id, Cliente cliente);
 
     Integer updateStatusCliente(Integer id, Boolean status);
+
+    List<Cliente> findByData(String dataProximo) throws ParseException;
 }

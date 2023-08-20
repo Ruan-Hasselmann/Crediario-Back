@@ -24,4 +24,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Query("update Cliente c set c.nome = ?1, c.cpf = ?2, c.rg = ?3, c.telefone = ?4 where c.id = ?5")
     Integer updateCliente(String nome, String cpf, String rg, String telefone, Integer id);
 
+    @Query("select c from Cliente c where c.pagamento.dataProximo = ?1 order by c.id")
+    List<Cliente> findByData(String dataProximo);
+
 }
