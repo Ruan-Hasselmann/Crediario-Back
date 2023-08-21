@@ -63,7 +63,7 @@ public class PagamentoServiceImpl implements PagamentoService {
     }
 
     private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         return dateFormat.format(date);
     }

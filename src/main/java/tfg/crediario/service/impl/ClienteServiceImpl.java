@@ -51,14 +51,12 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.updateStatus(status, id);
     }
 
-    public List<Cliente> findByData(String dataProximo) throws ParseException {
-        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-        dataProximo = String.valueOf(date.parse(dataProximo));
+    public List<Cliente> findByData(String dataProximo) {
         return clienteRepository.findByData(dataProximo);
     }
 
     private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         return dateFormat.format(date);
     }
