@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "\"idPagamento\"", nullable = false)
+    @Column(name = "\"id_pagamento\"", nullable = false)
     private Integer id;
 
     @Column(name = "\"dataProximo\"", length = Integer.MAX_VALUE)

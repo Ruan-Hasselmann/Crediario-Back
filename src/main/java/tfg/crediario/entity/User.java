@@ -11,7 +11,7 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "\"idUser\"", nullable = false)
+    @Column(name = "\"id_user\"", nullable = false)
     private Integer id;
 
     @Column(name = "usuario", nullable = false, length = Integer.MAX_VALUE)
