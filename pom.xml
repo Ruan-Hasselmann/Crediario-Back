@@ -10,7 +10,7 @@
     </parent>
     <groupId>tfg</groupId>
     <artifactId>Crediario</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <name>Crediario</name>
     <description>Crediario</description>
     <properties>

@@ -30,6 +30,7 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     @Override
     public Pagamento createPagamento(Pagamento pagamento) {
+        pagamento.setDataProximo(formatDate(pagamento.getDataProximo()));
         pagamento.setDataVenda(getDateTime());
         pagamento.setRestante(pagamento.getTotal() - pagamento.getEntrada());
         pagamento.setTotalPago(pagamento.getEntrada());
@@ -50,7 +51,7 @@ public class PagamentoServiceImpl implements PagamentoService {
     public int registrarPagamento(Integer id, String dataProximo, Double valor) {
         Optional<Pagamento> pagamentoAtual = getPagamentoById(id);
         if (pagamentoAtual.isPresent()) {
-            pagamentoAtual.get().setDataProximo(dataProximo);
+            pagamentoAtual.get().setDataProximo(formatDate(dataProximo));
             pagamentoAtual.get().setRestante(pagamentoAtual.get().getRestante() - valor);
             pagamentoAtual.get().setTotalPago(pagamentoAtual.get().getTotalPago() + valor);
             return updatePagamento(id, pagamentoAtual);
@@ -66,6 +67,12 @@ public class PagamentoServiceImpl implements PagamentoService {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    private String formatDate(String data){
+        String[] dataSeparada = data.split("-");
+        data = dataSeparada[2] + "-" + dataSeparada[1] + "-" +dataSeparada[0];
+        return data;
     }
 
 }
