@@ -52,12 +52,18 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     public List<Cliente> findByData(String dataProximo) {
-        return clienteRepository.findByData(dataProximo);
+        return clienteRepository.findByData(formatDate(dataProximo));
     }
 
     private String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    private String formatDate(String data){
+        String[] dataSeparada = data.split("-");
+        data = dataSeparada[2] + "-" + dataSeparada[1] + "-" +dataSeparada[0];
+        return data;
     }
 }
