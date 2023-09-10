@@ -36,6 +36,9 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     public Cliente createCliente(Cliente cliente) {
+        if(clienteRepository.existCliente(cliente.getCpf())) {
+            return new Cliente();
+        }
         cliente.setStatus(true);
         cliente.setDataCadastro(getDateTime());
         enderecoService.createEndereco(cliente.getEndereco());
@@ -53,6 +56,10 @@ public class ClienteServiceImpl implements ClienteService {
 
     public List<Cliente> findByData(String dataProximo) {
         return clienteRepository.findByData(formatDate(dataProximo));
+    }
+
+    public List<Cliente> findByCpf(String cpf){
+        return clienteRepository.findByCpf(cpf);
     }
 
     private String getDateTime() {

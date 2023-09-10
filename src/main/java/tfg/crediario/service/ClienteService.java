@@ -19,4 +19,6 @@ public interface ClienteService {
     Integer updateStatusCliente(Integer id, Boolean status);
 
     List<Cliente> findByData(String dataProximo) throws ParseException;
+
+    List<Cliente> findByCpf(String cpf);
 }

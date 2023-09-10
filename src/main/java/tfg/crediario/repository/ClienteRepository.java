@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tfg.crediario.entity.Cliente;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
@@ -26,5 +27,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("select c from Cliente c where c.pagamento.dataProximo = ?1 order by c.id")
     List<Cliente> findByData(String dataProximo);
+
+    @Query("select (count(c) > 0) from Cliente c where c.cpf = ?1")
+    boolean existCliente(String cpf);
+
+    @Query("select c from Cliente c where c.cpf = ?1 order by c.id")
+    List<Cliente> findByCpf(String cpf);
 
 }

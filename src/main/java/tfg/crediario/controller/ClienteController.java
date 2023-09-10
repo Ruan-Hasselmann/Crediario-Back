@@ -51,7 +51,11 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
         Cliente createdCliente = clienteService.createCliente(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdCliente);
+        if(createdCliente.getStatus()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdCliente);
+        }
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(createdCliente);
     }
 
     /**
@@ -61,7 +65,7 @@ public class ClienteController {
      * @param cliente Cliente com as informações atualizadas.
      * @return ResponseEntity com a mensagem de sucesso ou not found.
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<String> updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
         Integer updatedCliente = clienteService.updateCliente(id, cliente);
         if (updatedCliente != null) {
@@ -93,7 +97,7 @@ public class ClienteController {
      * @param id ID do cliente a ser ativado.
      * @return ResponseEntity com a mensagem de sucesso ou not found.
      */
-    @PostMapping("/{id}/ativar")
+    @PutMapping("/{id}/ativar")
     public ResponseEntity<String> activeCliente(@PathVariable Integer id) {
         Integer status = clienteService.updateStatusCliente(id, true);
         if (status == 1) {
@@ -106,5 +110,10 @@ public class ClienteController {
     @GetMapping("/data/{dataProximo}")
     public List<Cliente> getClienteByData(@PathVariable String dataProximo) throws ParseException {
         return clienteService.findByData(dataProximo);
+    }
+
+    @GetMapping("/cpf/{cpf}")
+    public List<Cliente> getClienteByCpf(@PathVariable String cpf) {
+        return clienteService.findByCpf(cpf);
     }
 }
