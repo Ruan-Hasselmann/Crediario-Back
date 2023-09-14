@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tfg.crediario.entity.Endereco;
 import tfg.crediario.entity.Pagamento;
+import tfg.crediario.service.ClienteService;
 import tfg.crediario.service.PagamentoService;
 
 import java.util.List;
@@ -19,8 +19,12 @@ public class PagamentoController {
     private final PagamentoService pagamentoService;
 
     @Autowired
-    public PagamentoController(PagamentoService pagamentoService) {
+    private final ClienteService clienteService;
+
+    @Autowired
+    public PagamentoController(PagamentoService pagamentoService, ClienteService clienteService) {
         this.pagamentoService = pagamentoService;
+        this.clienteService = clienteService;
     }
 
     /**
@@ -71,6 +75,7 @@ public class PagamentoController {
     public ResponseEntity<String> updatePagamento(@PathVariable Integer id, @RequestBody Pagamento pagamento) {
         Integer updatedPagamento = pagamentoService.updatePagamento(id, pagamento);
         if (updatedPagamento == 1) {
+            clienteService.updateStatusCliente(id, true);
             return ResponseEntity.ok("Pagamento atualizado com sucesso");
         } else {
             return ResponseEntity.notFound().build();
