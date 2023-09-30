@@ -2,6 +2,7 @@ package tfg.crediario.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tfg.crediario.entity.Cliente;
 import tfg.crediario.entity.Vendedor;
 import tfg.crediario.repository.VendedorRepository;
 import tfg.crediario.service.VendedorService;
@@ -17,6 +18,9 @@ public class VendedorServiceImpl implements VendedorService {
 
     @Override
     public Vendedor createVendedor(Vendedor vendedor) {
+        if(vendedorRepository.existVendedor(vendedor.getCpf())) {
+            return new Vendedor();
+        }
         return vendedorRepository.save(vendedor);
     }
 

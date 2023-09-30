@@ -21,4 +21,7 @@ public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
     @Modifying
     @Query("delete from Vendedor v where v.id = ?1")
     int deleteVendedorById(Integer id);
+
+    @Query("select (count(v) > 0) from Vendedor v where v.cpf = ?1")
+    boolean existVendedor(String cpf);
 }
