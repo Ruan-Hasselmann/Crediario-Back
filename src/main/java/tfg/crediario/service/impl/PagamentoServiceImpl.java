@@ -38,7 +38,10 @@ public class PagamentoServiceImpl implements PagamentoService {
     }
 
     @Override
-    public Integer updatePagamento(Integer id, @NotNull Pagamento pagamento) {
+    public Integer updatePagamento(Integer id, Pagamento pagamento) {
+        pagamento.setDataProximo(formatDate(pagamento.getDataProximo()));
+        pagamento.setRestante(pagamento.getTotal() - pagamento.getEntrada());
+        pagamento.setTotalPago(pagamento.getEntrada());
         return pagamentoRepository.updatePagamento(pagamento.getDataProximo(), pagamento.getEntrada(), pagamento.getFormaPagamento(), pagamento.getRestante(), pagamento.getTipoPagamento(), pagamento.getTotal(), pagamento.getTotalPago(), id);
     }
 
