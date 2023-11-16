@@ -8,4 +8,4 @@ WORKDIR /app/Crediario-Back
 
 EXPOSE 8080
 
-CMD mvn clean spring-boot:run -P -DskipTests
+CMD mvn clean spring-boot:run -DskipTests
