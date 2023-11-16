@@ -10,12 +10,29 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres:/postgres
+    expose:
+      - 5432
+    command: -p 5432
+    healthcheck:
+      test: pg_isready -U asten -d avmb -p 5432
+      interval: 15s
+      timeout: 5s
+      retries: 20
+    restart: always
+
+  backend:
+    container_name: backend
+    image: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8090
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
 volumes:
-  sftp-data:
-  postgres-data:
-networks:
-  app-tier:
-    driver: bridge
-  postgres-network:
-    driver: bridge
+  postgres:
