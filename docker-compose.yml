@@ -14,11 +14,6 @@ services:
     expose:
       - 5432
     command: -p 5432
-    healthcheck:
-      test: pg_isready -U asten -d avmb -p 5432
-      interval: 15s
-      timeout: 5s
-      retries: 20
     restart: always
 
   backend:
